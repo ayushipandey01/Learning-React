@@ -10,12 +10,17 @@ class App extends React.Component {
     this.state = {isLoggedIn : true};
   }
 
+  onLoginSuccessful(email , password){
+    // console.log(email , password);
+    this.setState({isLoggedIn : true});
+  }
+
   render(){
     return (
       <div>
         {/* <Users/> */}
         {
-          this.state.isLoggedIn ? <Users /> : <LoginForm />
+          this.state.isLoggedIn ? <Users /> : <LoginForm onLoginSuccessful = {this.onLoginSuccessful.bind(this)}/>
         }
         
       </div>    

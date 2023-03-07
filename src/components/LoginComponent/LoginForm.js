@@ -2,16 +2,20 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './LoginForm.css';
+import Spinner from '../Common/Spinner/Spinner';
+
+let auth = true;
 
 class LoginForm extends React.Component {
     constructor(){
         super();
-        this.state = {email : "" , password: ""};
+        this.state = {email : "" , password: "" , isLoading : false , showError : false};
     }
 
     updateEmail(e){
         var email = e.target.value;
         this.setState({email : email});
+        // e.target.value ="";
         // console.log(email);
     }
 
@@ -21,12 +25,26 @@ class LoginForm extends React.Component {
         // console.log(password);
     }
 
-    onSubmit(){
-        console.log({email : this.state.email , password : this.state.password});
+    // onSubmit(){
+    //     console.log({email : this.state.email , password : this.state.password});
+    // }
+
+    onLogin(email,password){
+        this.setState({isLoading : true});
+        setTimeout(()=>{  
+          if(auth){
+            this.props.onLoginSuccessful();
+          }    
+          else{
+            this.setState({showError : true});
+          }     
+        this.setState({isLoading : false});
+        },3000)                    
     }
 
     render(){
-        return (
+      // console.log(this.props);
+        return (          
             <Form className='loginForm'>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -43,9 +61,15 @@ class LoginForm extends React.Component {
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" label="Check me out" />
               </Form.Group>
-              <Button onClick = {() => {this.onSubmit()}} variant="primary">
+              {
+                this.state.isLoading ? <Spinner /> : <Button onClick = {() => {this.onLogin(this.state.email,this.state.password)}} variant="primary">
                 Submit
               </Button>
+              }
+              {
+                this.state.showError && <p style={{color : "red"}}>Invalid Credentials</p>
+              }
+              
             </Form>
           );
     }

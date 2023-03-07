@@ -1,7 +1,7 @@
 import React from "react";
 import User from "../User/User";
 import './Users.css';
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from '../Common/Spinner/Spinner';
 
 // const data = [
 //     {
@@ -375,7 +375,7 @@ import Spinner from 'react-bootstrap/Spinner';
 class Users extends React.Component {
     constructor(){
         super(); 
-        this.state = {currentValue : 0 , isLoading : true , usersData : []};
+        this.state = {currentValue : 0 , isLoading : true , usersData : [] , searchValue : ""};
     }
 
     // incrementCounter(){
@@ -384,11 +384,11 @@ class Users extends React.Component {
     // };
 
     componentWillMount(){
-        console.log("Component will mount");
+        // console.log("Component will mount");
     }
 
     componentDidMount(){
-        console.log("Component did mount.");
+        // console.log("Component did mount.");
 
         // setTimeout(() =>
         // {
@@ -398,26 +398,43 @@ class Users extends React.Component {
         fetch('https://dummyjson.com/users/')
         .then(res => res.json())
         .then(users => {
-            console.log(users);
+            // console.log(users);
+            this.completeData = users.users;
             this.setState({isLoading : false , usersData : users.users})            
         })
     }
 
     showSpinner(){
-        return (
-            <div className="spinner">
-                <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-                </Spinner>
-            </div>
+        return(
+            <Spinner />
+        )
+    }
+
+    filterUsers(e){
+        const userText = e.target.value.toLowerCase();
+        // console.log(userText);
+        this.setState({searchValue : userText});
+        
+        // console.log(this.completeData);
+        const fileteredUsers = this.completeData.filter((data)=> {
+            return data.firstName.toLowerCase().startsWith(userText);
             
-          );
+        })
+
+        // console.log(fileteredUsers);
+
+        this.setState({usersData : fileteredUsers});
     }
 
     showUsers(){
         return (
             <div>
                 <h2>This is Users components</h2>
+
+                <div className="inputText">
+                    <input onChange = {(e)=> this.filterUsers(e)} value = {this.state.searchValue} type="text" placeholder ="Type a Name....."></input>
+                </div>                
+
                 <div className="cardStyle">            
                 {
                     this.state.usersData.map((data) => {
@@ -432,9 +449,11 @@ class Users extends React.Component {
     }
 
     render(){
-        console.log("Rendered");
+        // console.log("Rendered");
         return(
             <div>
+
+               
                 
                 {/* <div className="button">
                     <p>current value : {this.state.currentValue}</p>
