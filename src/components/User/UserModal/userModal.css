@@ -1,0 +1,27 @@
+.modal-content{
+    position: fixed !important;
+    left: 500px;
+    top: 100px;
+    width: 400px !important;
+    height: 400px !important;
+    background-color: lightgrey !important;
+}
+
+p{
+    text-align: center;    
+}
+
+.para{
+    width: 300px;
+    margin-top: 60px;
+}
+
+img{
+    height: 200px;
+    width: 300px;
+}
+.modalBody{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

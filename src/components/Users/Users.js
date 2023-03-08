@@ -2,6 +2,7 @@ import React from "react";
 import User from "../User/User";
 import './Users.css';
 import Spinner from '../Common/Spinner/Spinner';
+import UserModal from "../User/UserModal/userModal";
 
 // const data = [
 //     {
@@ -375,7 +376,7 @@ import Spinner from '../Common/Spinner/Spinner';
 class Users extends React.Component {
     constructor(){
         super(); 
-        this.state = {currentValue : 0 , isLoading : true , usersData : [] , searchValue : ""};
+        this.state = {currentValue : 0 , isLoading : true , usersData : [] , searchValue : "" , showModal : false};
     }
 
     // incrementCounter(){
@@ -426,6 +427,15 @@ class Users extends React.Component {
         this.setState({usersData : fileteredUsers});
     }
 
+    openModal(id){
+        this.id = id;
+        this.setState({showModal : true});
+    }
+
+    closeModal(){
+        this.setState({showModal : false});
+    }
+
     showUsers(){
         return (
             <div>
@@ -439,7 +449,7 @@ class Users extends React.Component {
                 {
                     this.state.usersData.map((data) => {
                         return (
-                            <User key = {data.id} details = {data}/>
+                            <User key = {data.id} details = {data} openModal = {this.openModal.bind(this)}/>
                         )
                     })             
                 }            
@@ -465,7 +475,13 @@ class Users extends React.Component {
             {
                 // Conditional Rendering
                 this.state.isLoading ? this.showSpinner() : this.showUsers()
-            }  
+            } 
+
+
+            {
+                this.state.showModal && <UserModal id = {this.id} closeModal = {this.closeModal.bind(this)}/> 
+            } 
+
                 
             </div>        
         )

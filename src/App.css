@@ -2,3 +2,12 @@
   text-align: center;
   padding-top: 1rem;
 }
+
+.button{
+  margin: 10px;
+  width: 30px;
+}
+
+span{
+  margin: 10px;
+}

@@ -6,7 +6,11 @@ import Card from 'react-bootstrap/Card';
 function User(props){
 
     //object destructuring
-    const {details} = props;
+    const {details , openModal} = props;
+
+    function showFullDetails(){
+        openModal(details.id);
+    }
 
         return (
             <div className='cardStyle'>
@@ -15,7 +19,7 @@ function User(props){
                     <Card.Body className = "cardBody">
                         <Card.Title>{details.firstName}</Card.Title>
                         <Card.Text>{details.username}</Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Button onClick = {showFullDetails} variant="primary">Show Details</Button>
                     </Card.Body>
                 </Card>
             </div>
