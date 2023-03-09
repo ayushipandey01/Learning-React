@@ -10,7 +10,7 @@ function Users (){
 
     var id = useRef(null);
     
-    const [isLoading , setIsLoading] = useState(false);
+    const [isLoading , setIsLoading] = useState(true);
     const [usersData , setUsersData] = useState([]);
     const [searchValue , setSearchValue] = useState("");
     const [showModal , setShowModal ] = useState(false);

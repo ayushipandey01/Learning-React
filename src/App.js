@@ -5,32 +5,51 @@ import LoginForm from './components/LoginComponent/LoginForm';
 import React , { useState , useEffect } from 'react';
 import UserModal from './components/User/UserModal/userModal';
 
+function App (){
 
-class App extends React.Component {
-  constructor(){
-    super();
-    this.state = {isLoggedIn : true};
-  } 
+  const [isLoggedIn , setIsLoggedIn] = useState(false);
 
-  onLoginSuccessful(email , password){
+  function onLoginSuccessful(email , password){
     // console.log(email , password);
-    this.setState({isLoggedIn : true});
+    // this.setState({isLoggedIn : true});
+    setIsLoggedIn(true);
   }
 
-  render(){
-    return (
+  return (      
+    <div>
+      {/* <Users/> */}
+      {
+        isLoggedIn ? <Users /> : <LoginForm onLoginSuccessful = {onLoginSuccessful}/>
+      }    
+    </div>    
+  );
+}
+
+// class App extends React.Component {
+//   constructor(){
+//     super();
+//     this.state = {isLoggedIn : false};
+//   } 
+
+//   onLoginSuccessful(email , password){
+//     // console.log(email , password);
+//     this.setState({isLoggedIn : true});
+//   }
+
+//   render(){
+//     return (
       
-      <div>
-        {/* <Users/> */}
-        {
-          this.state.isLoggedIn ? <Users /> : <LoginForm onLoginSuccessful = {this.onLoginSuccessful.bind(this)}/>
-        }     
+//       <div>
+//         {/* <Users/> */}
+//         {
+//           this.state.isLoggedIn ? <Users /> : <LoginForm onLoginSuccessful = {this.onLoginSuccessful.bind(this)}/>
+//         }     
            
         
-      </div>    
-    );
-  }
-}
+//       </div>    
+//     );
+//   }
+// }
 
 // function App(){
 //   //Array destructuring
