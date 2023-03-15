@@ -7,7 +7,7 @@ import UserModal from './components/User/UserModal/userModal';
 
 function App (){
 
-  const [isLoggedIn , setIsLoggedIn] = useState(true);
+  const [isLoggedIn , setIsLoggedIn] = useState(false);
 
   function onLoginSuccessful(email , password){
     // console.log(email , password);

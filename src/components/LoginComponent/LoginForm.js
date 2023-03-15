@@ -48,6 +48,7 @@ function LoginForm(props){
 
   return (          
     <Form className='loginForm'>
+      <h2>Login Form</h2>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control onChange = {(e)=> updateEmail(e)} value = {email} type="email" placeholder="Enter email" />
